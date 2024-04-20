@@ -1,5 +1,5 @@
 #root {
-  max-width: 1280px;
+  max-width: 980px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
@@ -33,10 +33,40 @@
   }
 }
 
-.card {
+ .card {
   padding: 2em;
 }
 
 .read-the-docs {
   color: #888;
+}
+
+
+.cars-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 980px;
+}
+
+.left {
+  flex: 1;
+}
+
+.divider {
+  margin: 0 20px;
+  width: 1px;
+  height: 1000px;
+  background-color: black;
+}
+
+.right {
+  flex: 1;
+}
+.car-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 20px;
+  max-height:90vh ; 
+  overflow-y: auto; 
 }
