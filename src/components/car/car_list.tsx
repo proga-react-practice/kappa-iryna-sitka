@@ -1,12 +1,6 @@
-// import { Car } from '../types';
+import { Car } from '../../types';
 import './car_list.css';
 
-export interface Car {
-  id: number;
-  maker: string
-  model: string
-  year: number
-}
 interface CarListProps {
   cars: Car[];
   setCars: (cars: Car[]) => void;
