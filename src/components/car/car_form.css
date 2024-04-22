@@ -1,6 +1,6 @@
 body {
     height: 100vh;
-    background-color: #c1c1c1;
+    background-color: #8e838374;
   }
   
   form {
@@ -8,7 +8,6 @@ body {
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    /* background-color: #1b1b4c;  */
     color: white; 
   }
   

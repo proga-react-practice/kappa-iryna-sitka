@@ -1,29 +1,22 @@
 import React, { useState } from 'react';
 import './car_form.css';
+import { Car } from '../../types';
 
-interface Car {
-  id: number;
-  maker: string;
-  model: string;
-  year: number;
-}
 
 const initialCarState: Car = {
   id: 0,
-  maker: 'Toyota',
-  model: 'Toyota RQ',
-  year: 2000,
+  maker: '',
+  model: '',
+  year: 0,
 };
 
-// interface CarFormProps {
-//   cars: Car[];
-//   setCars: (cars: Car[]) => void;
-//   addCar: (car: Car) => void;
-// }
+interface CarFormProps {
+  addCar: (car: Car) => void;
+}
 
-export default function CarForm({ addCar }: { addCar: (car: Car) => void }) {
-  const [car, setCar] = useState<Car>(initialCarState); // Car object state
-  const [errors, setErrors] = useState<string[]>([]); // Errors state
+export default function CarForm({ addCar  }: CarFormProps) {
+  const [car, setCar] = useState<Car>(initialCarState); 
+  const [errors, setErrors] = useState<string[]>([]); 
 
   const validate = () => {
     const newErrors: string[] = [];
@@ -55,7 +48,13 @@ export default function CarForm({ addCar }: { addCar: (car: Car) => void }) {
     if (validate()) {
       addCar(car);
       setCar(initialCarState);
+
     }
+  };
+
+  const handleClear = () => {
+    setCar(initialCarState);
+    setErrors([]);
   };
 
   return (
@@ -101,6 +100,9 @@ export default function CarForm({ addCar }: { addCar: (car: Car) => void }) {
       ))}
       <button type="submit" style={{ backgroundColor: '#0c3f0c' }}>
         Submit
+      </button>
+      <button type="button" style={{ backgroundColor: '#C0BCBC' }} onClick={handleClear}>
+        Clear
       </button>
     </form>
   );
