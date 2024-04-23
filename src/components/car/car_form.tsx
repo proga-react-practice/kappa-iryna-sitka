@@ -101,7 +101,7 @@ export default function CarForm({ addCar  }: CarFormProps) {
       <button type="submit" style={{ backgroundColor: '#0c3f0c' }}>
         Submit
       </button>
-      <button type="button" style={{ backgroundColor: '#C0BCBC' }} onClick={handleClear}>
+      <button type="button" style={{ backgroundColor: '#0B419E' }} onClick={handleClear}>
         Clear
       </button>
     </form>
