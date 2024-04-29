@@ -1,22 +1,29 @@
 import React, { useState } from 'react';
 import './car_form.css';
 import { Car } from '../../types';
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
+import ClearIcon from '@mui/icons-material/Clear';
+import InputLabel from '@mui/material/InputLabel';
+import NativeSelect from '@mui/material/NativeSelect';
+import TextField from '@mui/material/TextField';
+import Alert from '@mui/material/Alert';
 
 
 const initialCarState: Car = {
   id: 0,
   maker: '',
-  model: '',
-  year: 0,
+  model: '12',
+  year: 2020,
 };
 
 interface CarFormProps {
   addCar: (car: Car) => void;
 }
 
-export default function CarForm({ addCar  }: CarFormProps) {
-  const [car, setCar] = useState<Car>(initialCarState); 
-  const [errors, setErrors] = useState<string[]>([]); 
+export default function CarForm({ addCar }: CarFormProps) {
+  const [car, setCar] = useState<Car>(initialCarState);
+  const [errors, setErrors] = useState<string[]>([]);
 
   const validate = () => {
     const newErrors: string[] = [];
@@ -48,7 +55,6 @@ export default function CarForm({ addCar  }: CarFormProps) {
     if (validate()) {
       addCar(car);
       setCar(initialCarState);
-
     }
   };
 
@@ -58,25 +64,33 @@ export default function CarForm({ addCar  }: CarFormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+
+    <form onSubmit={handleSubmit} >
+    <Stack direction="column" spacing={2}>
+
       <div>
-        <label htmlFor="make">Make:</label>
-        <select
-          id="make"
-          name="make"
-          value={car.maker}
-          onChange={handleSelectChange}
+        <InputLabel variant="standard" htmlFor="uncontrolled-native">
+          Make:
+        </InputLabel>
+        <NativeSelect
+          defaultValue={30}
+          inputProps={{
+            id: "make",
+            name: "make",
+            value: car.maker,
+            onChange: handleSelectChange,
+          }}
         >
           <option value="">Select Maker</option>
           <option value="Toyota">Toyota</option>
           <option value="Honda">Honda</option>
           <option value="Ford">Ford</option>
-        </select>
+        </NativeSelect>
       </div>
+
       <div>
-        <label htmlFor="model">Model:</label>
-        <input
-          type="text"
+        <InputLabel htmlFor="model">Model:</InputLabel>
+        <TextField
           id="model"
           name="model"
           value={car.model}
@@ -84,26 +98,35 @@ export default function CarForm({ addCar  }: CarFormProps) {
         />
       </div>
       <div>
-        <label htmlFor="year">Year:</label>
-        <input
+        <InputLabel htmlFor="year">Year:</InputLabel>
+        <TextField
           type="number"
-          min={1900}
-          max={2024}
           id="year"
           name="year"
           value={car.year}
           onChange={handleChange}
+          inputProps={{ min: 1900, max: 2024 }}
         />
       </div>
       {errors.map((error, index) => (
-        <div key={index}>{error}</div>
+        <Alert key={index} severity="error">
+          {error}
+        </Alert>
       ))}
-      <button type="submit" style={{ backgroundColor: '#0c3f0c' }}>
-        Submit
-      </button>
-      <button type="button" style={{ backgroundColor: '#0B419E' }} onClick={handleClear}>
-        Clear
-      </button>
+
+      <Stack direction="row" spacing={2}>
+        <Button type="submit" variant="contained" color="success">
+          Submit
+        </Button>
+
+        <Button variant="contained" onClick={handleClear}>
+          Clear
+          <ClearIcon />
+        </Button>
+      </Stack>
+      </Stack>
+
     </form>
+
   );
 }
