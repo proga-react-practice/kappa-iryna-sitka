@@ -27,21 +27,21 @@ export default function MotorcycleList({ motorcycles, setMotorcycles }: Motorcyc
   };
 
   return (
-      <Stack direction="column" spacing={2}>
-        {motorcycles.map((motorcycle, i) => (
-          <Collapse key={i} in={deletedIndex !== i} unmountOnExit>
-            <Card className="motorcycle-item">
-              <CardContent>
-                <Typography variant="body1">Maker: {motorcycle.maker}</Typography>
-                <Typography variant="body1">Model: {motorcycle.model}</Typography>
-                <Typography variant="body1">Year: {motorcycle.year}</Typography>
-                <Button onClick={() => deleteMotorcycle(i)} color='error' variant="contained">
-                  Delete
-                </Button>
-              </CardContent>
-            </Card>
-          </Collapse>
-        ))}
-      </Stack>
+    <Stack direction="column" spacing={2} sx={{ borderRadius: 5, margin: 1 }}>
+      {motorcycles.map((motorcycle, i) => (
+        <Collapse key={i} in={deletedIndex !== i} unmountOnExit>
+          <Card className="motorcycle-item" sx={{ marginBottom: 1, borderBottom: 1 }}>
+            <CardContent sx={{ paddingLeft: 2, paddingRight: 2, paddingBottom: 1, paddingTop: 1 }}>
+              <Typography variant="body1" sx={{ marginBottom: 1 }}>Maker: {motorcycle.maker}</Typography>
+              <Typography variant="body1" sx={{ marginBottom: 1 }}>Model: {motorcycle.model}</Typography>
+              <Typography variant="body1" sx={{ marginBottom: 1 }}>Year: {motorcycle.year}</Typography>
+              <Button onClick={() => deleteMotorcycle(i)} color='error' variant="contained">
+                Delete
+              </Button>
+            </CardContent>
+          </Card>
+        </Collapse>
+      ))}
+    </Stack>
   );
-}
+      }  

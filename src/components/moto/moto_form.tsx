@@ -9,8 +9,8 @@ import { MenuItem, Alert, TextField, FormControl, Select, SelectChangeEvent, Pap
 const initialMotorcycleState: Motorcycle = {
   id: 0,
   maker: '',
-  model: '2020',
-  year: 2020,
+  model: '',
+  year: 0,
 };
 
 interface MotorcycleFormProps {
