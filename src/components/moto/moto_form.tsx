@@ -74,6 +74,8 @@ export default function MotorcycleForm({ addMotorcycle }: MotorcycleFormProps) {
               defaultValue='Select Maker'
               value={motorcycle.maker}
               onChange={handleSelectChange}
+              color='secondary'
+
             >
               <MenuItem value="">Select Maker</MenuItem>
               <MenuItem value="Toyota">Suzuki</MenuItem>
@@ -85,6 +87,7 @@ export default function MotorcycleForm({ addMotorcycle }: MotorcycleFormProps) {
             id="model"
             name="model"
             label="Model"
+            color='secondary'
             value={motorcycle.model}
             onChange={handleChange}
           />
@@ -95,18 +98,19 @@ export default function MotorcycleForm({ addMotorcycle }: MotorcycleFormProps) {
             label="Year"
             value={motorcycle.year}
             onChange={handleChange}
+            color='secondary'
             inputProps={{ min: 1900, max: 2024 }}
           />
           {errors.map((error, index) => (
-            <Alert key={index} severity="error">
+            <Alert key={index} severity="error" >
               {error}
             </Alert>
           ))}
           <Stack direction="row" spacing={2}>
-            <Button variant="contained" type="submit" color='success'>
+            <Button variant="contained" type="submit" color='primary'>
               Submit
             </Button>
-            <Button variant="contained" onClick={handleClear} startIcon={<ClearIcon />}>
+            <Button variant="contained" onClick={handleClear} startIcon={<ClearIcon />} color='secondary'>
               Clear
             </Button>
           </Stack>

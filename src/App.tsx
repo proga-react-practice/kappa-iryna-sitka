@@ -5,7 +5,7 @@ import MotorcycleForm from './components/moto/moto_form';
 import MotorcycleList from './components/moto/moto_list';
 import { Motorcycle } from './types';
 import { createTheme, responsiveFontSizes } from '@mui/material/styles';
-import { red, blue, deepOrange, grey, green } from '@mui/material/colors';
+import {  blue, deepOrange, grey, green} from '@mui/material/colors';
 
 import './App.css';
 
@@ -28,18 +28,18 @@ function App() {
     createTheme({
       palette: {
         mode: 'light',
-        primary: blue,
+        primary: green,
         secondary: {
-          main: green[500],
+          main: blue[300],
         },
-        divider: blue[100],
+        
+        divider: grey[600],
         background: {
-          default: '#eee',
           paper: '#fff',
         },
         text: {
           primary: '#000',
-          secondary: grey[500],
+          secondary: grey[600],
         },
       },
     })
