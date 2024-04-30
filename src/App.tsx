@@ -1,73 +1,109 @@
+import React, { useState } from 'react';
+import { Box, Stack, Divider, Button, ThemeProvider } from '@mui/material';
+
+import MotorcycleForm from './components/moto/moto_form';
+import MotorcycleList from './components/moto/moto_list';
+import { Motorcycle } from './types';
+import { createTheme, responsiveFontSizes } from '@mui/material/styles';
+import { red, blue, deepOrange, grey, green } from '@mui/material/colors';
+
 import './App.css';
-import CarForm from './components/car/car_form';
-import { useState } from 'react';
-import CarList from './components/car/car_list';
-import { Car } from './types';
-import MaterialUISwitch from './components/materialUISwitch'; 
-import { createTheme, ThemeProvider } from '@mui/material';
-import {  useEffect } from 'react';
 
 function App() {
-  const [cars, setCars] = useState<Car[]>([]);
-  const [darkMode, setDarkMode] = useState<boolean>(false);
+  const [Motorcycles, setMotorcycles] = useState<Motorcycle[]>([]);
+  const [theme, setTheme] = useState('light');
 
-  const addCar = (car: Car) => {
-    setCars([...cars, car]);
+  const addMotorcycle = (Motorcycle: Motorcycle) => {
+    setMotorcycles([...Motorcycles, Motorcycle]);
   };
 
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
+  const handleThemeChange = () => {
+    if (theme === 'light') {
+      setTheme('dark');
+    } else {
+      setTheme('light');
+    }
   };
-
-  const theme = createTheme({
-    palette: {
-      mode: darkMode ? 'dark' : 'light',
-      primary: {
-        main: '#646bf3',
+  const lightTheme = responsiveFontSizes(
+    createTheme({
+      palette: {
+        mode: 'light',
+        primary: blue,
+        secondary: {
+          main: green[500],
+        },
+        divider: blue[100],
+        background: {
+          default: '#eee',
+          paper: '#fff',
+        },
+        text: {
+          primary: '#000',
+          secondary: grey[500],
+        },
       },
-      secondary: {
-        main: '#fff',
+    })
+  );
+  
+  const darkTheme = responsiveFontSizes(
+    createTheme({
+      palette: {
+        mode: 'dark',
+        primary: deepOrange,
+        secondary: {
+          main: green[700],
+        },
+        divider: deepOrange[700],
+        background: {
+          default: '#333',
+          paper: '#222',
+        },
+        text: {
+          primary: '#fff',
+          secondary: grey[200],
+        },
       },
-      background: {
-        default: darkMode ? '#101113' : '#fff',
-      },
-      text: {
-        primary: darkMode ? '#fefefe' : '#101113',
-      },
-    },
-  });
-
-  useEffect(() => {
-    document.body.style.backgroundColor = theme.palette.background.default;
-    document.body.style.color = theme.palette.text.primary;
-  }, [theme]);
+    })
+  );
   
 
+  let selectedTheme;
+  if (theme === 'light') selectedTheme = lightTheme;
+  else selectedTheme = darkTheme;
+
   return (
-    <ThemeProvider theme={theme}>
-      <div className='app-container'>
-      <div className="theme-toggle" style={{ position: 'fixed', top: '20px', right: '20px' }}>
+    <ThemeProvider theme={selectedTheme}>
+      <Box
+        className={`app-container ${theme}`}
+        sx={{
+          backgroundColor: theme === 'light' ? '#fff' : '#222', 
+          padding: '30px', 
+        }}
+      >
+        <Box
+          className="theme-toggle"
+          sx={{ position: 'fixed', top: 10, left: 10 }}
+        >
+          <Button variant="contained" onClick={handleThemeChange}>
+            {theme === 'light' ? 'Dark' : theme === 'dark' ? 'Light' : 'Light'}
+          </Button>
+        </Box>
 
-        <MaterialUISwitch
-          checked={darkMode}
-          onChange={toggleDarkMode}
-          inputProps={{ 'aria-label': 'toggle dark mode' }}
-          color="secondary"
-          style={{ marginRight: '10px' }}
-        />
-      </div>
+        <Stack direction="row" spacing={1}>
+          <Box className="Motorcycle-form-add">
+            <MotorcycleForm addMotorcycle={addMotorcycle} />
+          </Box>
 
-        <div className='car-form-container'>
-          <div className='car-form-add'>
-            <CarForm addCar={addCar} />
-          </div>
+          <Divider orientation="vertical" flexItem />
 
-          <div className='divider'></div>
-          <div className='car-form-list'>
-            <CarList cars={cars} setCars={setCars} />
-          </div>
-        </div>
-      </div>
+          <Box className="Motorcycle-form-list">
+            <MotorcycleList
+              motorcycles={Motorcycles}
+              setMotorcycles={setMotorcycles}
+            />
+          </Box>
+        </Stack>
+      </Box>
     </ThemeProvider>
   );
 }

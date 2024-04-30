@@ -1,7 +1,5 @@
 #root {
-  max-width: 980px;
-  margin: 0 auto;
-  padding: 2rem;
+  /* max-width: 980px; */
   text-align: center;
   font-family: 'Roboto', sans-serif;
 }
@@ -22,14 +20,9 @@
 }
 
 
-.car-form-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 980px;
-}
 
-.car-form-add {
+
+.Motorcycle-form-add {
   flex: 1;
 }
 
@@ -41,22 +34,18 @@
 }
 
 
-.car-form-list {
+.Motorcycle-form-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   grid-gap: 21px;
   max-height:90vh ; 
   overflow-y: auto; 
-  border: 2px solid black; 
   padding: 10px; 
-  background-color: rgba(234, 234, 239, 0.205);
-  border-radius: 10px; 
 
 }
 
-.car-form-add {
-  background-color: rgba(234, 234, 239, 0.205);
-  border-radius: 10px; 
-  border: 2px solid black; 
-  padding: 10px; 
-}
+/* body{
+  background-color: black;
+
+} */
+
