@@ -1,31 +1,70 @@
+import React, { useState } from 'react';
+import { Box, Stack, Divider, Button, ThemeProvider } from '@mui/material';
+
+import MotorcycleForm from './components/moto/moto_form';
+import MotorcycleList from './components/moto/moto_list';
+import { Motorcycle } from './types';
+import {darkTheme,lightTheme} from  "./themes";
+
 import './App.css';
-import CarForm from './components/car/car_form';
-import { useState } from 'react';
-import CarList from './components/car/car_list';
-import { Car } from './types';
-
-
 
 function App() {
-  const [cars, setCars] = useState<Car[]>([]); 
+  const [Motorcycles, setMotorcycles] = useState<Motorcycle[]>([]);
+  const [theme, setTheme] = useState('light');
 
-  const addCar = (car: Car) => {
-    setCars([...cars, car]);
+  const addMotorcycle = (Motorcycle: Motorcycle) => {
+    setMotorcycles([...Motorcycles, Motorcycle]);
   };
 
+  const handleThemeChange = () => {
+    if (theme === 'light') {
+      setTheme('dark');
+    } else {
+      setTheme('light');
+    }
+  };
+ 
+  
+
+  let selectedTheme;
+  if (theme === 'light') selectedTheme = lightTheme;
+  else selectedTheme = darkTheme;
+
   return (
-    <div className='car-form-container'>
-      <div className='car-form-add'>
-        <CarForm addCar={addCar} />
-      </div>
-      <div className='divider'></div>
-      <div className='car-form-list'>
-        <CarList cars={cars} setCars={setCars} />
-      </div>
-    </div>
+    <ThemeProvider theme={selectedTheme}>
+      <Box
+        className={`app-container ${theme}`}
+        sx={{
+          backgroundColor: theme === 'light' ? '#fff' : '#222', 
+          padding: '3', 
+        }}
+      >
+        <Box
+          className="theme-toggle"
+          sx={{ position: 'fixed', top: 10, left: 10 }}
+        >
+          <Button variant="contained" onClick={handleThemeChange}>
+            {theme === 'light' ? 'Dark' : theme === 'dark' ? 'Light' : 'Light'}
+          </Button>
+        </Box>
+
+        <Stack direction="row" spacing={1}>
+          <Box className="Motorcycle-form-add">
+            <MotorcycleForm addMotorcycle={addMotorcycle} />
+          </Box>
+
+          <Divider orientation="vertical" flexItem />
+
+          <Box className="Motorcycle-form-list">
+            <MotorcycleList
+              motorcycles={Motorcycles}
+              setMotorcycles={setMotorcycles}
+            />
+          </Box>
+        </Stack>
+      </Box>
+    </ThemeProvider>
   );
-  
-  
 }
 
 export default App;

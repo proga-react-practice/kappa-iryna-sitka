@@ -1,4 +1,4 @@
-export interface Car {
+export interface Motorcycle {
     id: number;
     maker: string;
     model: string;
