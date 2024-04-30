@@ -13,6 +13,8 @@ const initialMotorcycleState: Motorcycle = {
   year: 0,
 };
 
+const makers = ['Honda', 'Yamaha', 'Suzuki', 'Kawasaki', 'Ducati'];
+
 interface MotorcycleFormProps {
   addMotorcycle: (motorcycle: Motorcycle) => void;
 }
@@ -65,24 +67,25 @@ export default function MotorcycleForm({ addMotorcycle }: MotorcycleFormProps) {
     <Paper sx={{ padding: 2 }}>
     <form onSubmit={handleSubmit}>
         <Stack direction="column" spacing={2}>
-          <FormControl >
-            <InputLabel>Make</InputLabel>
-            <Select
-              id="make"
-              name="make"
-              label="Make"
-              defaultValue='Select Maker'
-              value={motorcycle.maker}
-              onChange={handleSelectChange}
-              color='secondary'
-
-            >
-              <MenuItem value="">Select Maker</MenuItem>
-              <MenuItem value="Toyota">Suzuki</MenuItem>
-              <MenuItem value="Honda">Yamaha</MenuItem>
-              <MenuItem value="Ford">BMW</MenuItem>
-            </Select>
-          </FormControl>
+        <FormControl>
+          <InputLabel>Make</InputLabel>
+          <Select
+            id="make"
+            name="make"
+            label="Make"
+            defaultValue=""
+            value={motorcycle.maker}
+            onChange={handleSelectChange}
+            color="secondary"
+          >
+          <MenuItem value="">Select Maker</MenuItem>
+                {makers.map((maker) => (
+                  <MenuItem key={maker} value={maker}>
+                    {maker}
+                  </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
           <TextField
             id="model"
             name="model"

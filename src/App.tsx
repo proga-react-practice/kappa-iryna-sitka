@@ -4,8 +4,7 @@ import { Box, Stack, Divider, Button, ThemeProvider } from '@mui/material';
 import MotorcycleForm from './components/moto/moto_form';
 import MotorcycleList from './components/moto/moto_list';
 import { Motorcycle } from './types';
-import { createTheme, responsiveFontSizes } from '@mui/material/styles';
-import {  blue, deepOrange, grey, green} from '@mui/material/colors';
+import {darkTheme,lightTheme} from  "./themes";
 
 import './App.css';
 
@@ -24,47 +23,7 @@ function App() {
       setTheme('light');
     }
   };
-  const lightTheme = responsiveFontSizes(
-    createTheme({
-      palette: {
-        mode: 'light',
-        primary: green,
-        secondary: {
-          main: blue[300],
-        },
-        
-        divider: grey[600],
-        background: {
-          paper: '#fff',
-        },
-        text: {
-          primary: '#000',
-          secondary: grey[600],
-        },
-      },
-    })
-  );
-  
-  const darkTheme = responsiveFontSizes(
-    createTheme({
-      palette: {
-        mode: 'dark',
-        primary: deepOrange,
-        secondary: {
-          main: green[700],
-        },
-        divider: deepOrange[700],
-        background: {
-          default: '#333',
-          paper: '#222',
-        },
-        text: {
-          primary: '#fff',
-          secondary: grey[200],
-        },
-      },
-    })
-  );
+ 
   
 
   let selectedTheme;
@@ -77,7 +36,7 @@ function App() {
         className={`app-container ${theme}`}
         sx={{
           backgroundColor: theme === 'light' ? '#fff' : '#222', 
-          padding: '30px', 
+          padding: '3', 
         }}
       >
         <Box
